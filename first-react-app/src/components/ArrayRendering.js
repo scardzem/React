@@ -10,11 +10,9 @@ const ArrayRendering = () => {
   const [inputText, setInputText] = useState('');
   const [nextId, setNextId] = useState(5);
   //const names = ['HTML', 'CSS', 'JQuery', 'React'];
-
   const handleChange = (e) => {
     setInputText(e.target.value);
   };
-
   const handleClick = () => {
     const nextNames = names.concat({
       id: nextId,
@@ -24,13 +22,11 @@ const ArrayRendering = () => {
     setNames(nextNames);
     setInputText('');
   };
-
   const onRemove = (id) => {
     //filter 함수를 사용해서 제거 기능 구현
     const nextNames = names.filter((name) => name.id !== id);
     setNames(nextNames);
   };
-
   //배열의 map 함수를 이용하여 새로운 배열 만들기
   //맵은 요소, 인덱스를 받아올 수 있다.
   const nameList = names.map((name) => (
