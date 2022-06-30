@@ -1,0 +1,63 @@
+1. Hooks란?
+    - 기존의 리액트는 클래스형 컴포넌트 위주로 개발이 됐었다.
+    - 함수형 컴포넌트에는 state, ref등 생명주기 관리가 불가능했음
+    - Hooks가 등장하면서 useState, useRef, useEffect등 클래스형 컴포넌트에
+      존재하는 기능들이 함수형 컴포넌트에서도 사용가능하게 되었다.
+    - Hooks란 상태관리를 useState, 렌더링 직후의 동작을 만들 수 있는 useEffect등
+      기능을 제공해주는 라이브러리
+    - Hooks는 함수형 컴포넌트와 함께 사용
+
+2. useEffect
+    - 컴포넌트 렌더링될 때마다 특정 작업을 수행하도록 설정할 수 있는 Hook
+    - 처음 렌더링될 때와 업데이트될 때마다 실행
+    - 업데이트직전에 어떠한 작업을 수행하고 싶으면 
+      useEffect에서 cleanup 함수를 리턴하면 됨
+
+3. useReducer
+    - 컴포넌트의 상황에 따라 상태 값을 다른 값으로 
+      업데이트 하고 싶을 때 사용하는 Hook
+    - 리듀서는 현재 상태와 업데이트를 위해 필요한 정보를 담은 액션을 매개변수로 받음
+        - function reducer(state, action){
+
+          }
+        - const [state, dispatch] = useReducer(reducer, {
+            상태의 초기값
+          });
+        - dispatch는 액션을 발생시키는 함수
+        - dispatch(action) => 액션이 실행되면서 리듀서 함수를 호출
+--MultipleInputUseReducer.js
+
+4. useMemo
+    - 컴포넌트 내에서 발생하는 연산을 최적화 해주는 Hook
+--Average.js
+--AverageUseMemo.js
+
+5. useCallback
+  - 주로 렌더링 성능을 최적화 할 때 사용하는 Hook
+  - useCallback 사용 시 만들어놓은 함수의 재사용성을 높일 수 있다.
+  - 만들어진 함수들은 렌더링 될 때마다 새로 만들어짐
+  - useCallback을 이용하면 새로운 함수가 계속 만들어지는 것을 방지
+
+6. 컴포넌트의 스타일링
+  - 정해진 방식은 없고 아래의 4가지 방식 중 취향에 따라 선택
+  - 일반 CSS 방식 : HTML/CSS 학습하면서 배웠던 방식과 동일한 형태
+  - SASS 방식 : Syntactically Awsome Style Sheet
+                CSS 전처리기로 복잡한 작업을 쉽게 처리
+                스타일 코드 재활용성을 높여줌
+                코드의 가독성을 높여줌
+                .sass, .scss 파일을 지원함
+                위 두 개의 파일은 문법이 서로 다름
+                .sass ;과 {} 사용 안 함
+                .scss CSS 문법과 유사하지만 조금 차이가 있음
+  - CSS 모듈 방식 : CSS 파일을 불러와서 사용 할 때 클래스 이름을 
+                    고유한 값으로 지정해주는 방식
+                      [파일명]_[클래스명]_[해시값] 형태로 자동으로
+                      클래스 이름이 지정됨.
+                      클래스 이름의 중첩을 방지해준다.
+                      파일명.module.css/sass/scss
+  - styled-component 방식 : styled-components라는 라이브러리에서
+                            제공하는 기능
+                            백틱(`)을 이용해서 태그와 스타일까지
+                            한 번 정의 할 수 있다.
+                            - 위에 백틱으로 지정하는 방식을
+                              tagged 탬플릿 리터럴이라고 한다.

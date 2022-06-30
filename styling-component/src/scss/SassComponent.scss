@@ -1,0 +1,47 @@
+// ./ 는 현재 폴더 ../는 이전 폴더(상위폴더)
+@import './utils.scss';
+
+
+.SassComponent {
+    display: flex;
+    .box { //CSS에서의 .SassComponent .box { }(SassComponent 안의 box 클래스를 선택하는거)
+        background: $red;
+        cursor: pointer;
+        transition: all 0.3s ease-in;
+
+        //.box클래스와 red클래스가 동시에 사용됐을 때
+        &.red{
+            background: $red;
+            @include square(1);
+        }
+        &.orange{
+            background: $orange;
+            @include square(2);
+        }
+        &.yellow{
+            background: $yellow;
+            @include square(3);
+        }
+        &.green{
+            background: $green;
+            @include square(4);
+        }
+        &.blue{
+            background: $blue;
+            @include square(5);
+        }
+        &.indigo{
+            background: $indigo;
+            @include square(6);
+        }
+        &.violet{
+            background: $violet;
+            @include square(7);
+        }
+
+        //.box에 hover됐을 때
+        &:hover{
+            background: black;
+        }
+    }
+}

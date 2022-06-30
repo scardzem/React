@@ -1,0 +1,19 @@
+.wrapper {
+    background: black;
+    padding: 1rem;
+    color: white;
+    font-size: 2rem;
+
+}
+
+.inverted{
+    color: skyblue;
+    background: white;
+    border: 5px solid skyblue;
+}
+
+/*글로벌 클래스 작성*/
+:global .something{
+    font-weight: bold;
+    color: aqua;
+}

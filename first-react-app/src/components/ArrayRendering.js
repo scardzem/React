@@ -43,4 +43,5 @@ const ArrayRendering = () => {
   );
 };
 
+//이벤트에 매개변수가 있는 메소드를 전달(맵핑)할 때는 무조건 화살표 함수를 써야된다.
 export default ArrayRendering;

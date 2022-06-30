@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
-import ArrayRendering from './components/ArrayRendering';
+import CustomHooks from './components/CustomHooks';
 function App() {
-  return <ArrayRendering></ArrayRendering>;
+  return <CustomHooks></CustomHooks>;
 }
 
 export default App;
