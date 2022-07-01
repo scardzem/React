@@ -1,0 +1,24 @@
+1. 할 일 목록(TodoList) 구현
+    - TodoTemplate: 다른 세 개의 컴포넌트를 감싸는 템플릿 컴포넌트
+    - TodoInsert: 할 일을 추가하는 컴포넌트
+    - TodoListItem: 할 일을 보여주는 컴포넌트
+    - TodoList: TodoListItem의 할 일들을 리스트로 보여주는 컴포넌트
+
+라이브러리 설치한 icon(이 사이트에 있는거 다 사용 가능)
+https://react-icons.github.io/react-icons/#/icons/md
+https://react-icons.netlify.com/#/icons/md
+
+(2. 의 내용은 Todo-app 만든 뒤 복사본인 todo-app-optimize에서 
+    추가 작업을 하여 작업 속도를 향상시키는 수업 
+    (할일 목록을 2500개로 만든 다음 체크, 삭제 해보면 
+     작업 속도가 느린데 이를 빠르게 하는 수업))
+2. 컴포넌트 성능 최적화하기
+    - 체크할 때마다 App 컴포넌트의 state 변경되면서 App 리렌더링
+        => 부모컴포넌트(App.js)가 리렌더링 되면서 TodoList 컴포넌트 그리고
+            그 안에 있는 TodoListItem 컴포넌트들이 모두 리렌더링
+        => TodoListItem의 개수가 증가하면 렌더링 속도가 저하됨
+        => React.memo를 이용해서 컴포넌트를 최적화
+        => React.memo를 이용하면 props의 변경이 없을 때는 렌더링이
+            되지 않도록 설정 가능하다.
+        => onRemove, onChecked가 계속 생성되지 않도록 설정
+            => useState나 useReducer를 사용
