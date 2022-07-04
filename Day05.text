@@ -1,0 +1,109 @@
+1. 불변성
+    - 불변성을 지킨다는 것은 기존의 값을 직접 수정하는 것이 아니고
+      새로운 값을 만들어 내는 것
+            const array = [1,2,3,4,5];
+
+            //배열을 복제하는 게 아니고 완전히 같은 배열을 가르키기 때문에
+            //원본 배열의 값이 변경됨
+            const nextArrayBad = array;
+            nextArrayBad[0] = 100;
+            console.log(array === nextArrayBad);
+            console.log(array[0]);
+
+            //복제된 배열을 새로 만들기 때문에
+            //원본 배열의 값이 변경되지 않음
+            const nextArrayGood = [...array];
+            nextArrayGood[0] = 1000;
+            console.log(array === nextArrayGood);
+            console.log(array[0]);
+
+    - 만약에 복제해야 될 객체나 배열이 복잡해지면 불변성을
+      유지하기가 어려워짐
+
+            const complexObject = {
+                id: 1,
+                name: 'a',
+                objectInside: {
+                    number: 1,
+                    checked: true,
+                }
+            };
+
+            const nextcomplexObject = {
+                ...complexObject,
+                name: 'b',
+                objectInside: {
+                    ...complexObject.objectInside,
+                    checked: false
+                }
+            };
+
+            console.log(complexObject === nextcomplexObject);  
+
+2. 불변성을 쉽게 유지해주는 immer 라이브러리
+    - immer 라이브러리를 사용하면 불변성을 신경쓰지 않는 것처럼
+      코드를 작성하되 불변성 관리는 제대로 이루어짐
+--AppWithoutImmer.js
+
+3. 리액트 라우터로 SPA(Single page Application) 구현
+    - 라우팅 : 웹 어플리케이션에서 사용자가 요청한 url에 따라
+                알맞는 페이지를 보여주는 것을 의미
+                글쓰기페이지, 글 목록 페이지, 글 상세 페이지 등
+                여러 페이지로 구성된 웹 어플리케이션을 만들 때
+                페이지 별로 컴포넌트들을 분리해가면서 프로젝트를
+                관리하기 위해 필요한 것이 라우팅 시스템
+    - 리액트에서는 리액트 라우터(React Router)라는 라이브러리를 
+      사용하여 라우팅 시스템을 구축한다.
+    - SPA(Single Page Application): 하나의 페이지로 구성된
+                                    웹 어플리케이션
+    - 기존 웹 어플리케이션에서는 사용자 요청에 따라 WAS(Web Application Server)에서
+      요청에 맞는 페이지들을 반환
+      사용자가 글 쓰기 페이지를 요청하면 글 쓰기.html, 글 쓰기.jsp 등 페이지를 반환
+      MPA(Multiple Page Application)이라고 함
+    - SPA에서는 사용자 요청에 따라 WAS에서 JSON 데이터만 반환해주고
+      해당 페이지에서 데이터 변경에 따라 리렌더링 됨.
+    - 리액트 라우터를 이용하면 손쉽게 SPA를 구현할 수 있다.
+    - 리액트 라우터를 이용할 때는 Link태그로 페이지 이동을 구현
+      이유는 a태그 사용 시 브라우저에서 페이지를 새로 불러오기 때문
+
+4. URL 파라미터와 쿼리스트링
+    - URL 파라미터는 주소의 경로에 유동적인 값을 넣는 형태의 파라미터 전달 방식
+        /about/전달할 파라미터 값
+    - 쿼리스트링은 주소의 뒷 부분에 ?key=value로 파라미터를 지정하는 방식
+      &로 이어서 여러 개의 파라미터를 전달 할 수 있음
+      ?key1=value1&key2=value2......
+      ?about?pagenum=1&keyword=react
+
+5. useNavigate
+    - Link 컴포넌트를 이용하지 않고 다른 페이지로 이동할 때
+      사용하는 Hook
+
+6. NavLink
+    - 링크에서 사용하는 경로가 현재 라우트 경로와 일치할 때
+      특정 스타일을 적용할 수 있는 컴포넌트
+
+7. Navigate
+    - 컴포넌트를 화면에 보여주는 순간 다른 페이지로 이동하고
+      싶을 때 사용하는 컴포넌트
+      ex) 로그인이 안되어있을 경우 로그인페이지로 이동
+
+8. 비동기 작업의 이해
+    - 동기 작업 : 작업1 시작 ---------> 작업1 끝
+                                            작업2시작  ---------> 작업2 끝
+                                                                            작업3 시작 ---------> 작업3 끝
+    - 동기 잡업의 장점 : 안정성이 보장된다.(해당 작업에 대한
+                        결과 응답이 없을 경우 다음 작업 진행 불가능)
+    - 동기 작업의 단점 : 모든 작업이 끝날 때 까지의 시간이 오래 소요
+    
+    - 비동기 작업 : 작업1 시작 ------------------> 작업1 끝
+                   작업2 시작 ---------> 작업2 끝
+                            작업3 시작 --> 작업3 끝
+    - 비동기 작업의 장점 : 모든 작업이 끝날 때 까지의 시간이 짧게 소요된다.
+    - 비동기 작업의 단점 : 어떤 작업이 먼저 끝날지 몰라서
+                          안정성이 보장되지 않는다.
+    - 비동기 통신이 속도가 빠르기 때문에 통신 프로토콜에서 대부분
+      비동기 통신을 사용한다.
+    - 대표적인 비동기 통신 라이브러리 : JQuery의 Ajax, 리액트의 Axios
+--news-viewer
+https://jsonplaceholder.typicode.com/todos
+API 받기 : https://newsapi.org/register 
