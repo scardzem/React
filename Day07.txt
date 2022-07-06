@@ -1,0 +1,59 @@
+1. 리덕스를 편하게 사용하기
+    - redux-actions: 액션 생성 함수를 더 짧게 구현할 수 있고
+                     리듀서함수에도 switch/case문이 아닌
+                     handleActions라는 함수를 사용하여
+                     구현할 수 있다.
+    - Hooks로 connect 대체하기
+      useSelector: 리덕스 스토어의 상태값 조회하는 함수
+      useDispatch: 액션을 실행시키는 Hook
+      useStore: 컴포넌트 내부에서 직접 스토어에 접근할 수 있는 Hook
+
+2. connect와 Hooks의 차이점
+    - connect로 컨테이너 컴포넌트를 만들었을 경우
+      부모 컴포넌트가 리렌더링 될 때 해당 컨테이너 컴포넌트의 
+      props가 바뀌지 않았다면 리렌더링이 자동으로 방지되어
+      성능이 최적화됨
+    - 반면 useSelector를 사용하여 리덕서 상태값을 조회하는 경우
+      최적화 작업이 자동으로 이뤄지지 않아 React.memo로 최적화 진행
+    - connect나 Hooks를 사용하는 것은 취향의 차이
+
+3. 리덕스 미들웨어
+    - 리액트 웹 어플리케이션에서 API 서버를 연동할 때
+      API 요청에 대한 상태도 잘 관리해야 됨
+    - 요청이 시작되었을 때는 로딩중임을, 요청이 끝났을 때는
+      로딩이 끝났음을 명시해 줘야 된다.
+    - 요청이 성공하면 받아온 응답에 대한 상태를 관리해야 되고
+      요청이 실패하면 결과에 대한 상태를 관리해야 한다.
+    - 리덕스에서는 이러한 비동기 작업의 상태를 관리하기 위해
+      미들웨어라는 기능을 지원한다.
+    - 미들웨어는 액션과 리듀서의 중간자라고 볼 수 있다.
+    - 미들웨어는 액션이 디스패치 되고 리듀서 함수가 호출되기 전에
+      호출된다.
+    - 실제 개발에서는 미들웨어를 개발 할 일이 거의 없다. 대신
+      다른 개발자들이 구현해놓은 미들웨어를 사용하면 된다.
+    
+4. 비동기 작업에서의 미들웨어
+  - 비동기 처리 시에 많이 사용되는 미들웨어
+    redux-thunk, redux-saga
+  
+5. redux-thunk
+  - 비동기 처리 시에 가장 많이 사용되는 미들웨어 라이브러리
+  - 함수형 액션을 디스패치 할 수 있다.
+  - thunk란 특정 작업을 나중에 할 수 있도록 미루기 위해
+    함수 형태로 감싼 것
+    ex)
+      const addOne = x => x + 1;
+      function addOneThunk(x) {
+          const thunk = () => addOne(x);
+          return thunk;
+      }
+      const fn = addOneThunk(1);
+      setTimeout(() => {
+          const value = fn();
+          console.log(value);
+      }, 1000);
+  - redux-thunk 라이브러리를 사용하면 thunk 함수를 만들어서
+    dispatch의 시점을 바꿀 수 있다.
+
+    https://jsonplaceholder.typicode.com/posts
+    https://jsonplaceholder.typicode.com/users
