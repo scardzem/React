@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import Sample from "../components/sample";
-import { getPost, getUsers } from "../lib/api";
+import Sample from "../components/Sample";
+import { getPost, getUsers } from "../modules/sample";
 import { useEffect } from "react";
 import { bindActionCreators } from "redux";
 
@@ -30,8 +30,8 @@ export default connect(
   (state) => ({
     post: state.sample.post,
     users: state.sample.users,
-    loadingPost: state.sample.loading.GET_POST,
-    loadingUsers: state.sample.loading.GET_USERS,
+    loadingPost: state.loading["sample/GET_POST"],
+    loadingUsers: state.loading["sample/GET_USERS"],
   }),
   (dispatch) =>
     bindActionCreators(

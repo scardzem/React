@@ -1,4 +1,4 @@
-import SampleContainer from "./Containers/SampleContainer";
+import SampleContainer from "./containers/SampleContainer";
 
 function App() {
   return <SampleContainer />;
